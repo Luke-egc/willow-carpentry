@@ -113,8 +113,9 @@
     .nav-links a { font-size: 0.875rem; font-weight: 600; color: #4B5563; transition: color 0.2s; }
     .nav-links a:hover { color: var(--charcoal); }
     .nav-right { display: flex; align-items: center; gap: 16px; }
-    .nav-phone { font-size: 0.9rem; font-weight: 700; color: var(--charcoal); display: flex; align-items: center; gap: 7px; transition: color 0.2s; }
-    .nav-phone:hover { color: var(--orange); }
+    .nav-quote-btn { font-size: 0.875rem; padding: 9px 18px; border-radius: 50px; white-space: nowrap; }
+    .nav-phone { font-size: 0.9rem; font-weight: 700; color: var(--charcoal); display: flex; align-items: center; gap: 7px; transition: color 0.2s; border: 1.5px solid var(--border); border-radius: 50px; padding: 7px 14px; }
+    .nav-phone:hover { color: var(--orange); border-color: var(--orange); }
     .ham { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
     .ham span { display: block; width: 22px; height: 2px; background: var(--charcoal); border-radius: 2px; transition: all 0.3s; }
     .ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -441,7 +442,12 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .nav-links, .nav-right { display: none; }
+      .nav-links { display: none; }
+      .nav-right { display: flex; gap: 8px; }
+      .nav-phone { font-size: 0.78rem; padding: 6px 10px; white-space: nowrap; }
+      .nav-phone span { display: none; }
+      .nav-quote-btn { font-size: 0.78rem !important; padding: 8px 12px !important; }
+      .hero-btns { display: none; }
       .ham { display: flex; }
       .services-grid, .why-grid { grid-template-columns: 1fr; }
       .services-hd { flex-direction: column; align-items: flex-start; }
@@ -489,7 +495,7 @@
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.65 3.32C2.02 2.16 3.1 1.37 4.27 1.37h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           0434 459 704
         </a>
-        <button onclick="openModal()" class="btn btn-orange">Get Free Quote</button>
+        <button onclick="openModal()" class="btn btn-orange nav-quote-btn">Get a Free Quote</button>
       </div>
       <button class="ham" id="ham" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
