@@ -1154,15 +1154,55 @@
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && quoteModal.classList.contains('open')) closeModal(); });
 
   // ── Form submit
-  document.getElementById('quoteForm').addEventListener('submit', e => {
+  document.getElementById('quoteForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const btn = e.target.querySelector('.form-btn');
-    btn.textContent = 'Sending...'; btn.disabled = true;
-    setTimeout(() => {
+    const form = e.target;
+    const btn  = form.querySelector('.form-btn');
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    const data = {
+      fname:   form.fname.value.trim(),
+      lname:   form.lname.value.trim(),
+      phone:   form.phone.value.trim(),
+      email:   form.email.value.trim(),
+      suburb:  form.suburb.value.trim(),
+      service: form.service.value,
+      message: form.message.value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        throw new Error(json.error || 'Something went wrong.');
+      }
+
+      // Success
       btn.textContent = '✓ Request Sent! Jack will be in touch within 24 hours.';
       btn.style.background = '#16a34a';
-      setTimeout(() => { btn.textContent = 'Send My Request →'; btn.style.background = ''; btn.disabled = false; e.target.reset(); closeModal(); }, 5000);
-    }, 900);
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = 'Send My Request →';
+        btn.style.background = '';
+        btn.disabled = false;
+        closeModal();
+      }, 5000);
+
+    } catch (err) {
+      btn.textContent = 'Send My Request →';
+      btn.disabled = false;
+      btn.style.background = '';
+      const msg = err.message || 'Something went wrong. Please try again or call 0434 459 704.';
+      alert(msg);
+    }
   });
 </script>
 </body>
